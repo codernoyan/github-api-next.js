@@ -1,19 +1,19 @@
 import Link from "next/link";
 
-async function getRepos() {
-  const response = await fetch('https://api.github.com/users/Preankasaha/repos');
+async function getRepos(userName) {
+  const response = await fetch(`https://api.github.com/users/${userName}/repos`);
   const repos = await response.json();
   return repos;
 }
 
 export default async function Repos() {
-  const repos = await getRepos();
+  const repos = await getRepos('Preankasaha');
   return (
     <section className="px-2 mb-6">
-      <h2 className="text-xl font-bold">Repos of Divai</h2>
+      <h2 className="text-xl font-bold mt-2">Repositories:</h2>
       {/* repos list */}
       <div className="mt-4">
-        <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {
             repos?.map(({ id, name, description, owner, watchers_count }) => (
               <li key={id} className="bg-slate-100 p-2 rounded-sm">

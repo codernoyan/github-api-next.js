@@ -68,7 +68,7 @@ export default async function Repo({ name }) {
         <h2><span className="font-semibold">Last Pushed:</span> {showLocalDateTime(repo?.pushed_at)}</h2>
       </div>
       <div className="mt-4">
-        <Link href={repo?.html_url} className="bg-slate-100 font-semibold px-4 py-2 hover:bg-slate-900 hover:text-white transition-colors" target="_blank">View this repository</Link>
+        <Link href={repo?.html_url} className="bg-slate-900 text-white font-semibold px-4 py-2 hover:bg-slate-100 hover:text-black transition-colors" target="_blank">View this repository</Link>
       </div>
     </section>
   )

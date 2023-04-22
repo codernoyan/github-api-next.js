@@ -34,7 +34,7 @@ export default async function Codes() {
       <div className="space-y-1">
         {/* <Image src={avatar_url} height={400} width={400} alt="avtar" /> */}
         <img src={avatar_url} alt="avtar" className="h-80 w-full" />
-        <h2><span className="font-semibold">User Name:</span> {login}❤️</h2>
+        <h2><span className="font-semibold">User Name:</span> {login}🤩</h2>
         <h2><span className="font-semibold">Total Repositories:</span> {public_repos}</h2>
         <h2><span className="font-semibold">Created at:</span> {showLocalDateTime(created_at)}</h2>
         <hr />
