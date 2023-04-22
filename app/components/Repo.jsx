@@ -11,11 +11,20 @@ async function getLanguages(name) {
   const languages = response.json();
   return languages;
 };
+async function getCmmits(name) {
+  const response = await fetch(`https://api.github.com/repos/Preankasaha/${name}/commits`);
+  const commits = response.json();
+  return commits;
+};
 
 export default async function Repo({ name }) {
+  // repos
   const repo = await getRepo(name);
   // languages
   const languages = await getLanguages(name);
+
+  // commits
+  const commits = await getCmmits(name);
 
   // date format
   function showLocalDateTime(dateString) {
@@ -38,12 +47,13 @@ export default async function Repo({ name }) {
 
   return (
     <section className="mt-4 space-y-2">
-      <h2>Name: {repo?.name}</h2>
-      <p>Description: {repo?.description ? repo?.description : 'Not available'}</p>
-      <p>Forks Count: {repo?.forks_count}</p>
-      <p>Views Count: {repo?.watchers_count}</p>
+      <h2><span className="font-semibold">Name:</span> {repo?.name}</h2>
+      <p><span className="font-semibold">Description:</span> {repo?.description ? repo?.description : 'Not available'}</p>
+      <p><span className="font-semibold">Forks Count:</span> {repo?.forks_count}</p>
+      <p><span className="font-semibold">Views Count:</span> {repo?.watchers_count}</p>
+      <p><span className="font-semibold">Total Commits:</span> {commits?.length}</p>
       <div>
-        <h2>Languages used:</h2>
+        <h2 className="font-semibold">Languages used:</h2>
         <ul>
           {
             Object.keys(languages)?.map((language, i) => (
@@ -53,11 +63,13 @@ export default async function Repo({ name }) {
         </ul>
       </div>
       <div>
-        <h2>Created at: {showLocalDateTime(repo?.created_at)}</h2>
+        <h2><span className="font-semibold">Created at:</span> {showLocalDateTime(repo?.created_at)}</h2>
         {/* <h2>Last updated: {showLocalDateTime(repo?.updated_at)}</h2> */}
-        <h2>Last Pushed: {showLocalDateTime(repo?.pushed_at)}</h2>
+        <h2><span className="font-semibold">Last Pushed:</span> {showLocalDateTime(repo?.pushed_at)}</h2>
       </div>
-      <Link href={repo?.html_url} className="underline decoration-slate-900 mt-2" target="_blank">View this repository</Link>
+      <div className="mt-4">
+        <Link href={repo?.html_url} className="bg-slate-100 font-semibold px-4 py-2 hover:bg-slate-900 hover:text-white transition-colors" target="_blank">View this repository</Link>
+      </div>
     </section>
   )
 }
